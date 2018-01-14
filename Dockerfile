@@ -4,12 +4,12 @@
 
 FROM node:latest
 
-RUN mkdir -p /home/www/express-app
-WORKDIR /home/www/express-app
+RUN mkdir -p /home/www/se-app
+WORKDIR /home/www/se-app
 
-COPY . /home/www/express-app
-RUN npm install
+COPY . /home/www/se-app
+# RUN npm install  
 
-EXPOSE 3000
+EXPOSE 3019
 CMD ["npm", "start"]
 

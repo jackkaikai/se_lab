@@ -12,7 +12,7 @@ let uploadDir = path.resolve(__dirname, '../temp');
 let multipartMiddleware = multiparty({uploadDir});
  
 
-router.get('/ok',function(req, res, next){
+router.get('/listfile',function(req, res, next){
 
     var accessKey = 'Zvf1stktGElAF_n4TKRduaPoTPfm4rt2WzTaR49K';
     var secretKey = 'jPXP-8AAayQBFL-KXUQibb_mkdjVCQebQcrc0Wfp';
@@ -24,7 +24,6 @@ router.get('/ok',function(req, res, next){
     config.zone = qiniu.zone.Zone_z0;
     var bucketManager = new qiniu.rs.BucketManager(mac, config);
     var bucket = "file-update-tool";
-    var key = "app.zip";
 
     var bucket_url = 'http://p2h9efhxp.bkt.clouddn.com/';
     var options = {

@@ -133,7 +133,7 @@ $(document).ready(function(){
         }
 
 
-	$.get("ok",function(res){
+	$.get("listfile",function(res){
 		var items  = res.items;
 		console.log(items);
 
