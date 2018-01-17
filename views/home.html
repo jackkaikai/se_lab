@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+  <meta charset="UTF-8">
+  <title>文件上传工具</title>
+  <link rel="stylesheet" href="../../semantic/dist/semantic.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="../semantic/dist/semantic.min.js"></script>
+<script>
+    //点击进入文件夹
+    function eve(event) {
+	console.log(this);
+        var dir = $(this).parents('.card.type-directory').attr("id");
+        console.log(event.buttons);
+        // $('.ui.cards').empty();
+        // $.get('listdir',{dir:dir},function (res) {
+        //     var files = res.files;
+        //     files.forEach(function (file) {
+        //         file.file_Name = file.fileName;
+        //         file.file_url = file.URL;
+        //         file.file_time = file.file_upTime;
+        //         append_file(file);
+        //     });
+        // });
+    }
+</script>
+
+	<style type="text/css">
+		.container{
+			padding-top: 10px;
+		}
+		#file-zone{
+			padding: 5%;
+			min-height: 500px;
+		}
+		#path{
+			min-width: 13% ;
+			margin-left: 10px;
+		}
+		#file_example{
+			margin-top:20px;
+		}
+	</style>
+
+</head>
+
+<body>
+
+    <div class="ui container">
+
+		<!-- 登录框 -->
+		<div class="ui modal">
+			<div class="ui middle aligned center aligned grid">
+				<div class="column">
+					<form class="ui  form">
+						<div class="ui stacked segment">
+							<div class="field">
+								<div class="ui left icon input">
+									<i class="user icon"></i>
+									<input type="text" name="user" id="user" placeholder="用户名">
+								</div>
+							</div>
+							<div class="field">
+								<div class="ui left icon input">
+									<i class="lock icon"></i>
+									<input type="password" name="password" placeholder="密码">
+								</div>
+							</div>
+							<div class="ui fluid large teal submit button" id="login-button">登录</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<!--导航栏-->
+        <div class="ui blue  inverted pointing stackable menu">
+            <div class="header item">文件上传</div>
+			<div class="header item" id="path">
+				/
+			</div>
+			<div class="header item">
+				<span class="right floated">
+					<i class="reply icon" ></i>
+				</span>
+			</div>
+			<a class="header  right item" >
+				登录
+			</a>
+	    </div>
+
+		<!--文件区域-->
+	    <div class="twelve wide column" id='file-zone'>
+	        <div class="ui four cards" id='concrete-files'>
+
+				<!--文件-->
+
+				<!--{% for item in items %}-->
+	            <!--<div class="ui card type-file" >-->
+	                <!--<div class="content">-->
+	                    <!--<a href="" class="”header“">绿巨人</a>-->
+	                    <!--<div class="meta">-->
+	                        <!--<span>时间</span>-->
+	                    <!--</div>-->
+	                    <!--<div class="description">-->
+								<!--{{item.key}}-->
+	                    <!--</div>-->
+	                <!--</div>-->
+				    <!--<div class="extra content">-->
+	                	<!--<a href="">-->
+		                    <!--<span class="right floated">-->
+		                        <!--<i class="download icon"></i>-->
+									<!--下载-->
+		                    <!--</span>-->
+	                	<!--</a>-->
+				      <!--&lt;!&ndash; <span><i class="user icon"></i> 35 Friends </span> &ndash;&gt;-->
+				    <!--</div>-->
+	            <!--</div>-->
+				<!--{% endfor %}-->
+
+				<!--&lt;!&ndash;文件夹&ndash;&gt;-->
+	            <!--<div class="ui card type-directory" id="look">-->
+	                <!--<div class="content">-->
+	                    <!--<a class="”header“">look</a>-->
+	                <!--</div>-->
+	                <!--<div class="extra content">-->
+						<!--<a id="path-enter">-->
+							<!--<span class="right floated">-->
+								<!--<i class="sign in icon"></i>-->
+								<!--进入-->
+							<!--</span>-->
+						<!--</a>-->
+	                <!--</div>-->
+	            <!--</div>-->
+
+	        </div>
+        </div>
+
+		
+		<div class="ui divider"></div>
+
+		<div class="ui container" >
+			<div class="ui container center aligned button" id="file-container">
+				<a class="btn btn-default btn-lg " id="pickfiles" href="#" >
+					<span>上传文件</span>
+				</a>
+			</div>
+			<div id="file_example">
+				<div class="ui indicating progress" data-value="0" data-total="100">
+					<div class="bar">
+						<div class="progress"></div>
+					</div>
+					<div class="label">等待上传</div>
+				</div>
+			</div>
+		</div>
+
+	
+	</div>
+
+</body>
+
+
+
+
+<script type="text/javascript" src="../js/plupload.full.min.js"></script>
+<script type="text/javascript" src="../js/qiniu.min.js"></script>
+<script type="text/javascript" src="../js/update.js"></script>
+</html>
