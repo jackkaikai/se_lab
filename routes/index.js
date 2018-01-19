@@ -20,16 +20,12 @@ var connection = mysql.createConnection({
     password : '123456',
     database : 'file-up'
 });
-connection.connect();
-//  var connection = mysql.createConnection({
-//   host     : 'localhost',
-//   user     : 'root',
-//   password : '123456',
-//   database : 'file'
-// });
-router.get('/listdir',function(req, res, next){
+
+
+router.get('/home',function(req, res, next){
     var  sql = 'SELECT distinct file_dir FROM file_information';
-//查
+
+    //查
     connection.query(sql,function (err, result) {
         if(err){
             console.log('[SELECT ERROR] - ',err.message);
@@ -38,18 +34,24 @@ router.get('/listdir',function(req, res, next){
         console.log('--------------------------SELECT----------------------------');
         console.log(result);
         console.log('------------------------------------------------------------\n\n');
-        res.json({dirs:result});
+
+        var dir_url = 'listfile?dir='  
+        result.forEach(function(item) {
+            item.url = dir_url+item.file_dir;
+        });
+
+        res.render('home.html',{dirs:result});
     });
 
 
 
-})
+});
 
 router.get('/listfile',function(req, res, next){
     var pretix = req.query.dir;
-    // console.log(pretix);
     var  sql = 'SELECT * FROM file_information where file_dir = ?';
-//查
+
+    //查
     connection.query(sql,pretix,function (err, result) {
         if(err){
             console.log('[SELECT ERROR] - ',err.message);
@@ -61,17 +63,24 @@ router.get('/listfile',function(req, res, next){
         // res.json({dirs:result});
         result.forEach(function(item) {
             item.URL=url+item.fileID
+            item.detail_url = 'detail?id='+item.fileID;
         });
 
-        console.log(result);
-        res.json({files:result});
+        res.render('file.html',{files:result,this_dir:pretix});
     });
 
-})
+});
+
+router.get('/detail',function(req, res, next){
+    var id = req.query.id;
+    res.render('detail.html',{id:id});
+});
+
 
 router.post('/upload', multipartMiddleware, function(req, res, next) {
 
-    console.log('文件'+req.files);
+
+
     const qiniu = require("qiniu");
 
     //需要填写你的 Access Key 和 Secret Key
@@ -162,14 +171,19 @@ router.post('/upload', multipartMiddleware, function(req, res, next) {
     }
 
     // 所有异步执行完成之后返回成功
-    let pAll = Promise.all(promiseArr);
-    pAll.then((localFile) => {
-        console.log(localFile);
-    res.json({code: 1})
-}, (err) => {
-        console.log(err);
-        res.json({code: 0, msg: '上传失败'});
-    })
-});
+        let pAll = Promise.all(promiseArr);
+        pAll.then((localFile) => {
+            console.log(localFile);
+        res.json({code: 1})
+    }, (err) => {
+            console.log(err);
+            res.json({code: 0, msg: '上传失败'});
+        })
+    });
+
+    router.get('/detail',function(req, res, next){
+        var file_id = req.query.id;
+        res.render('detail.html',{id:file_id});
+    });
 
 module.exports = router;

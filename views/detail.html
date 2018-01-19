@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传工具</title>
+    <link rel="stylesheet" href="../../semantic/dist/semantic.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="../semantic/dist/semantic.min.js"></script>
+    <script>
+        //点击进入文件夹
+        function eve(event) {
+            console.log(this);
+            var dir = $(this).parents('.card.type-directory').attr("id");
+            console.log(event.buttons);
+            // $('.ui.cards').empty();
+            // $.get('listdir',{dir:dir},function (res) {
+            //     var files = res.files;
+            //     files.forEach(function (file) {
+            //         file.file_Name = file.fileName;
+            //         file.file_url = file.URL;
+            //         file.file_time = file.file_upTime;
+            //         append_file(file);
+            //     });
+            // });
+        }
+    </script>
+
+    <style type="text/css">
+        .container{
+            padding-top: 10px;
+        }
+        #path{
+            min-width: 13% ;
+            margin-left: 10px;
+        }
+        .ui.card{
+            width: 85%;
+            margin: 5% auto;
+        }
+        /*.comment .content{*/
+            /*float: right;*/
+        /*}*/
+    </style>
+
+</head>
+
+<body>
+
+<div class="ui container">
+
+    <!-- 登录框 -->
+    <div class="ui modal">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <form class="ui  form">
+                    <div class="ui stacked segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="user" id="user" placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="密码">
+                            </div>
+                        </div>
+                        <div class="ui fluid large teal submit button" id="login-button">登录</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!--导航栏-->
+    <div class="ui blue  inverted pointing stackable menu">
+        <div class="header item">文件上传</div>
+        <div class="header item" id="path">
+            /
+        </div>
+        <div class="header item">
+				<span class="right floated">
+					<i class="reply icon" ></i>
+				</span>
+        </div>
+        <a class="header  right item" >
+            登录
+        </a>
+    </div>
+
+    <!--文件区域-->
+
+    <div class="ui container center">
+        <div class="ui card">
+            <div class="content center">
+                <div class="header huge"><h2>{{id}}</h2></div>
+                <div class="meta">上传时间</div>
+                <div class="description">文件的描述</div>
+                <div class="ui divider"></div>
+                <a class="ui teal tag label">工具</a>
+                <a class="ui teal tag label">精选</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ui card">
+        <div class="content">
+            <div class="ui comments">
+                <div class="comment">
+                    <div class="content">
+                        <a class="author">Stevie Feliciano</a>
+                        <div class="metadata">
+                            <div class="date">2 天前</div>
+                            <div class="rating"><i class="star icon"></i> 5 Faves </div>
+                        </div>
+                        <div class="text">嘿 伙計,我希望這個範例評筆能幫助你閱讀這個文档. </div>
+                    </div>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="comment">
+                    <div class="content">
+                        <a class="author">Stevie Feliciano</a>
+                        <div class="metadata">
+                            <div class="date">2 天前</div>
+                            <div class="rating"><i class="star icon"></i> 5 Faves </div>
+                        </div>
+                        <div class="text">嘿 伙計,我希望這個範例評筆能幫助你閱讀這個文档. </div>
+                    </div>
+                </div>
+
+                <div class="ui divider"></div>
+
+
+                <div class="comment">
+                    <div class="content">
+                        <a class="author">Stevie Feliciano</a>
+                        <div class="metadata">
+                            <div class="date">2 天前</div>
+                            <div class="rating"><i class="star icon"></i> 5 Faves </div>
+                        </div>
+                        <div class="text">嘿 伙計,我希望這個範例評筆能幫助你閱讀這個文档. </div>
+                    </div>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="comment">
+                    <div class="content">
+                        <a class="author">Stevie Feliciano</a>
+                        <div class="metadata">
+                            <div class="date">2 天前</div>
+                            <div class="rating"><i class="star icon"></i> 5 Faves </div>
+                        </div>
+                        <div class="text">嘿 伙計,我希望這個範例評筆能幫助你閱讀這個文档. </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ui card" style="padding: 2%">
+        <form class="ui reply form">
+            <div class="field">
+                <textarea></textarea>
+            </div>
+
+            <div class="ui massive star rating"  style="margin: auto 5%"></div>
+            <div class="ui blue labeled submit icon button" style="float: right"><i class="icon edit"></i> 提交评论</div>
+        </form>
+    </div>
+
+    <div class="ui divider"></div>
+
+</div>
+
+</body>
+
+
+
+
+<script type="text/javascript" src="../js/plupload.full.min.js"></script>
+<script type="text/javascript" src="../js/qiniu.min.js"></script>
+<script type="text/javascript" src="../js/comment.js"></script>
+</html>

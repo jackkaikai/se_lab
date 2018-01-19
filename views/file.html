@@ -60,9 +60,15 @@
         <div class="ui blue  inverted pointing stackable menu">
             <div class="header item">文件上传</div>
 			<div class="header item" id="path">
-				/
+				/{{this_dir}}
 			</div>
-
+			<div class="header item">
+				<span class="right floated">
+					<a href="home" style="color: white;">
+						<i class="reply icon" ></i>		
+					</a>
+				</span>
+			</div>
 			<a class="header  right item" >
 				登录
 			</a>
@@ -74,24 +80,35 @@
 	    <div class="twelve wide column" id='file-zone'>
 	        <div class="ui four cards" id='concrete-files'>
 
+				<!--文件-->
 
-
-				<!-- 文件夹 -->
-				{% for dir in dirs %}
-		            <div class="ui card type-directory" id={{dir.file_dir}}>
+				{% for file in files %}
+		            <div class="ui card type-file" >
 		                <div class="content">
-		                    <a class="”header“">{{dir.file_dir}}</a>
+		                    <a href="" class="”header“">{{file.file_dir}}</a>
+		                    <div class="meta">
+		                        <span>{{file.file_upTime}}</span>
+		                    </div>
+		                    <div class="description">
+									{{file.fileName}}
+		                    </div>
 		                </div>
-		                <div class="extra content">
-							<a  href="{{dir.url}}">
-								<span class="right floated">
-									<i class="sign in icon"></i>
-									进入
-								</span>
-							</a>
-		                </div>
+				   		<div class="extra content">
+		                	<a url={{file.URL}} name={{file.fileName}} class="fileDownload" id={{file.fileID}}>
+			                    <span class="right floated">
+			                        <i class="download icon"></i>
+										下载
+			                    </span>
+		                	</a>
+		                	<a href={{file.detail_url}}>
+			                    <span class=" floated">
+			                        <i class="inbox icon"></i>
+										详情
+			                    </span>
+		                	</a>
+					    </div>
 		            </div>
-	            {% endfor %}
+				{% endfor %}
 
 	        </div>
         </div>
@@ -100,7 +117,7 @@
 
 		<div class="ui divider"></div>
 
-		<!-- <div class="ui container" >
+		<div class="ui container" >
 			<div class="ui container center aligned button" id="file-container">
 				<a class="btn btn-default btn-lg " id="pickfiles" href="#" >
 					<span>上传文件</span>
@@ -114,8 +131,7 @@
 					<div class="label">等待上传</div>
 				</div>
 			</div>
-		</div> -->
-
+		</div>
 	</div>
 
 </body>
@@ -125,5 +141,5 @@
 
 <script type="text/javascript" src="../js/plupload.full.min.js"></script>
 <script type="text/javascript" src="../js/qiniu.min.js"></script>
-<script type="text/javascript" src="../js/update.js"></script>
+<script type="text/javascript" src="../js/file.js"></script>
 </html>
